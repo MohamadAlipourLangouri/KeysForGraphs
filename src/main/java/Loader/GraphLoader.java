@@ -76,6 +76,7 @@ public class GraphLoader {
         for (Vertex v:pattern.getPattern().vertexSet()) {
             if(v instanceof PatternVertex)
                 validTypes.addAll(v.getTypes());
+            System.out.println("Hello world");
         }
     }
 
