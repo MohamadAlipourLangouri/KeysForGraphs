@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PatternVertex extends Vertex{
 
     private boolean isPatternNode=true;
-    private String patternVertexRandomID="";
+    private String patternVertexRandomID="10";
 
     public PatternVertex(String type) {
         super(type.toLowerCase());
