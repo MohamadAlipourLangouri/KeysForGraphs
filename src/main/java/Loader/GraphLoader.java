@@ -4,6 +4,7 @@ import BaseInfra.Graph;
 import BaseInfra.Pattern;
 import BaseInfra.PatternVertex;
 import BaseInfra.Vertex;
+import Util.Config;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,10 +33,10 @@ public class GraphLoader {
         validTypes=new HashSet <>();
         validAttributes=new HashSet<>();
 
-        if(Config.optimizedLoadingBasedOnTGFD)
+        if(Config.optimizedLoadingBasedOnKeys)
             for (Pattern pattern:patterns) {
-                extractValidTypesFromTGFD(pattern);
-                extractValidAttributesFromTGFD(pattern);
+                extractValidTypesFromKeys(pattern);
+                extractValidAttributesFromKeys(pattern);
             }
     }
 
@@ -69,9 +70,9 @@ public class GraphLoader {
 
     /**
      * Extracts all the types being used in a TGFD from from X->Y dependency and the graph pattern
-     * @param pattern input TGFD
+     * @param pattern input Key
      */
-    private void extractValidTypesFromTGFD(Pattern pattern)
+    private void extractValidTypesFromKeys(Pattern pattern)
     {
         for (Vertex v:pattern.getPattern().vertexSet()) {
             if(v instanceof PatternVertex)
@@ -82,9 +83,9 @@ public class GraphLoader {
 
     /**
      * Extracts all the attributes names being used in a TGFD from from X->Y dependency and the graph pattern
-     * @param pattern input TGFD
+     * @param pattern input Key
      */
-    private void extractValidAttributesFromTGFD(Pattern pattern)
+    private void extractValidAttributesFromKeys(Pattern pattern)
     {
         for (Vertex v:pattern.getPattern().vertexSet()) {
             if(v instanceof PatternVertex)

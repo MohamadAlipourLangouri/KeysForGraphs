@@ -1,6 +1,5 @@
 package BaseInfra;
 
-import Util.Config;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -8,26 +7,9 @@ import java.util.ArrayList;
 public class PatternVertex extends Vertex{
 
     private boolean isPatternNode=true;
-    private String patternVertexRandomID="10";
 
     public PatternVertex(String type) {
         super(type.toLowerCase());
-
-        this.patternVertexRandomID= Config.generateRandomString(20);
-    }
-
-    public PatternVertex(String type, String patternVertexRandomID) {
-        super(type.toLowerCase());
-        this.patternVertexRandomID= patternVertexRandomID;
-    }
-
-
-    public PatternVertex copy(){
-        PatternVertex newV = new PatternVertex(new ArrayList<>(this.getTypes()).get(0), this.patternVertexRandomID);
-        for (Attribute attr : this.getAllAttributesList()) {
-            newV.addAttribute(attr.getAttrName(), attr.getAttrValue());
-        }
-        return newV;
     }
 
     @Override
@@ -36,10 +18,6 @@ public class PatternVertex extends Vertex{
                 "type='" + getTypes() + '\'' +
                 ", literals=" + getAllAttributesList() +
                 '}';
-    }
-
-    public String getPatternVertexRandomID() {
-        return patternVertexRandomID;
     }
 
     // This is being used to check if a PatternVertex can be mapped to a DataVertex

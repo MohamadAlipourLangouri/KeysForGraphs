@@ -12,18 +12,17 @@ public class Pattern implements Serializable {
 
     private String focusVertexType ="";
 
+    private Vertex focusVertex;
+
+    private String name = "";
+
+
 
     private HashMap<Vertex, Integer> vertexToRadius = new HashMap<>();
 
     public Pattern()
     {
         pattern = new DefaultDirectedGraph<>(Edge.class);
-    }
-
-    public Pattern(int diameter, String centerVertexType)
-    {
-        pattern = new DefaultDirectedGraph<>(Edge.class);
-        this.focusVertexType =centerVertexType;
     }
 
     public Graph<Vertex, Edge> getPattern() {
@@ -45,7 +44,15 @@ public class Pattern implements Serializable {
         return focusVertexType;
     }
 
-    private void setFocusVertexType(String focusVertexType) {
+    public void setFocusVertex(Vertex focusVertex) {
+        this.focusVertex = focusVertex;
+    }
+
+    public Vertex getFocusVertex() {
+        return focusVertex;
+    }
+
+    public void setFocusVertexType(String focusVertexType) {
         this.focusVertexType = focusVertexType;
     }
 
@@ -64,4 +71,11 @@ public class Pattern implements Serializable {
         return res.toString();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
