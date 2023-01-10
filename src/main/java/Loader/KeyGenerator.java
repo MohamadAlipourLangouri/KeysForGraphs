@@ -36,7 +36,7 @@ public class KeyGenerator {
         if(path.equals(""))
             return;
         HashMap<String, PatternVertex> allVertices=new HashMap<>();
-        Pattern currentKey=new Pattern();
+        Pattern currentKey=null;
         BufferedReader br=null;
 
         String line="";

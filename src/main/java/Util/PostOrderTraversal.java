@@ -5,26 +5,31 @@ import BaseInfra.Pattern;
 import BaseInfra.Vertex;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PostOrderTraversal {
 
     private Pattern pattern;
     private ArrayList<Vertex> vertices = new ArrayList<>();
+    private HashSet<Vertex> seenVertices;
 
     public PostOrderTraversal(Pattern pattern)
     {
         this.pattern = pattern;
+        seenVertices = new HashSet<>();
     }
 
     public void travers(Vertex root)
     {
-        vertices.add(root);
+        seenVertices.add(root);
         for (Edge e:pattern.getPattern().outgoingEdgesOf(root)) {
-            //This is the nodex that are connected to the input root
             Vertex target = e.getTarget();
-            // You need to recursively call
-            // Also, make sure not to call a node more than once
+            if(!seenVertices.contains(target))
+            {
+                travers(target);
+            }
         }
+        vertices.add(root);
     }
 
     public ArrayList<Vertex> getSortedVertices() {
