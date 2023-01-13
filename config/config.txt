@@ -1,0 +1,6 @@
+-p /Users/mortezaalipour/IdeaProjects/KeysForGraphs/sampleKeys/key1.txt
+-d ./rdf/imdb-141031.nt
+-t
+-t
+-dataset dbpedia
+-optgraphload true

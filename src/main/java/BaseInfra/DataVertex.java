@@ -6,9 +6,9 @@ import java.io.Serializable;
 
 public class DataVertex extends Vertex implements Serializable {
 
-
     private String URI ="";
 
+    private String uniqueID = null;
 
     public DataVertex(String uri, String type) {
         super(type.toLowerCase());
@@ -18,20 +18,24 @@ public class DataVertex extends Vertex implements Serializable {
 //        this.hashValue=vertexURI.hashCode();
     }
 
+    public String getURI() {
+        return URI;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
     @Override
     public String toString() {
         return "vertex{" +
                 "type='" + getTypes() + '\'' +
                 ", attributes=" + super.getAllAttributesList() +
                 '}';
-    }
-
-//    public int getHashValue() {
-//        return hashValue;
-//    }
-
-    public String getURI() {
-        return URI;
     }
 
     @Override

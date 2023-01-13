@@ -6,24 +6,12 @@ public class Edge extends DefaultEdge {
 
     private String label;
 
-
     @Override
     public String toString() {
         return "(" + getSource() + " -> " + getTarget() + " : " + label + ")";
     }
 
-//    public int hashCode() {
-//
-//        int result = 17;
-//        result = 31 * result + label.hashCode();
-//        result = 31 * result + getSource().hashCode();
-//        result = 31 * result + getTarget().hashCode();
-//
-//        return result;
-//    }
-
     public boolean equals(Object obj) {
-
         if (this == obj)
             return true;
         if (obj == null)

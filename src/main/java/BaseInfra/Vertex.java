@@ -7,12 +7,8 @@ public abstract class Vertex implements Comparable<Vertex>, Serializable {
 
     private Set<String> types=new HashSet<>();
 
-    private Set<Integer> jobletID=new HashSet<>();
-
     private boolean isMarked = false;
 
-    // Map of attributes using attribute name as a key
-    //TODO: Check the efficiency if we just store the attributes in a set (the attribute retrieval cannot be done in O(1) and takes O(n))
     private Map<String, Attribute> attributes;
 
     // TODO: consider adding an id field (e.g. vertexURI from dataVertex) [2021-02-07]
@@ -51,6 +47,15 @@ public abstract class Vertex implements Comparable<Vertex>, Serializable {
             }
             return "NULL";
         }
+    }
+
+    public String getAttributeValues(Collection<Attribute> attributes)
+    {
+        StringBuilder ret = new StringBuilder();
+        for (Attribute attr:attributes) {
+            ret.append(getAttributeValueByName(attr.getAttrName())).append(",");
+        }
+        return ret.toString();
     }
 
     public Collection<String> getAllAttributesNames() {
@@ -115,20 +120,6 @@ public abstract class Vertex implements Comparable<Vertex>, Serializable {
         return attributes.containsKey(name.toLowerCase());
     }
 
-    public void addJobletID(int jobletID)
-    {
-        this.jobletID.add(jobletID);
-    }
-
-    public void removeJobletID(int jobletID)
-    {
-        this.jobletID.remove(jobletID);
-    }
-
-    public Set<Integer> getJobletID() {
-        return jobletID;
-    }
-
     // The function to check if two vertices can be mapped to each other in subgraph isomorphism
     // This needs to be overridden in DataVertex and PatternVertex
     public boolean isMapped(Vertex v)
@@ -144,9 +135,4 @@ public abstract class Vertex implements Comparable<Vertex>, Serializable {
         this.isMarked = isMarked;
     }
 
-    // TODO: implement hashCode because Match uses vertex's hashcode as the signature [2021-02-07]
-    //@Override
-    //public int hashCode() {
-    //    return Objects.hash(intervals, vertices);
-    //}
 }

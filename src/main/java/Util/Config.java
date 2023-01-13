@@ -7,15 +7,15 @@ import java.util.*;
 
 public class Config {
 
-    private static HashMap<Integer, ArrayList<String>> typesPaths = new HashMap<>();
-    private static HashMap<Integer, ArrayList<String>> dataPaths = new HashMap<>();
+    public static ArrayList<String> typesPaths = new ArrayList<>();
+    public static ArrayList<String> dataPaths = new ArrayList<>();
 
     public static String patternPath = "";
     public static String language="N-Triples";
     public static dataset datasetName;
     public static boolean optimizedLoadingBasedOnKeys=false;
     public static boolean optimizedLoadingBasedOnAttributesInKeys = false;
-    public static boolean saveViolations=false;
+    public static boolean saveDuplicates=false;
     public static boolean debug =false;
 
     public static String path = "";
@@ -49,11 +49,8 @@ public class Config {
                 } else if (conf[0].equals("-debug")) {
                     debug = Boolean.parseBoolean(conf[1]);
                 }
-                else if (conf[0].equals("-path")) {
-                    path = String.valueOf(conf[1]);
-                }
-                else if(conf[0].equals("-saveviolations")) {
-                    saveViolations=Boolean.parseBoolean(conf[1]);
+                else if(conf[0].equals("-saveduplicates")) {
+                    saveDuplicates=Boolean.parseBoolean(conf[1]);
                 }
                 else if(conf[0].equals("-language")) {
                     language=conf[1];
@@ -68,15 +65,9 @@ public class Config {
                         datasetName= dataset.imdb;
                     }
                 }else if (conf[0].startsWith("-t")) {
-                    int snapshotId = Integer.parseInt(conf[0].substring(2));
-                    if (!typesPaths.containsKey(snapshotId))
-                        typesPaths.put(snapshotId, new ArrayList <>());
-                    typesPaths.get(snapshotId).add(conf[1]);
+                    typesPaths.add(conf[1]);
                 } else if (conf[0].startsWith("-d")) {
-                    int snapshotId = Integer.parseInt(conf[0].substring(2));
-                    if (!dataPaths.containsKey(snapshotId))
-                        dataPaths.put(snapshotId, new ArrayList <>());
-                    dataPaths.get(snapshotId).add(conf[1]);
+                    dataPaths.add(conf[1]);
                 }  else if (conf[0].startsWith("-p")) {
                     patternPath = conf[1];
                 }
@@ -85,32 +76,6 @@ public class Config {
             e.printStackTrace();
         }
     }
-
-    public static ArrayList <String> getFirstDataFilePath() {
-        return dataPaths.get(1);
-    }
-
-    public static ArrayList <String> getFirstTypesFilePath() {
-        return typesPaths.get(1);
-    }
-
-    public static HashMap <Integer, ArrayList <String>> getAllDataPaths() {
-        return dataPaths;
-    }
-
-    public static HashMap <Integer, ArrayList <String>> getAllTypesPaths() {
-        return typesPaths;
-    }
-
-    public static String generateRandomString(int length)
-    {
-        UUID randomUUID = UUID.randomUUID();
-        String randomString = randomUUID.toString().replaceAll("_", "");
-        if(length >0 && randomString.length()>length)
-            randomString = randomString.substring(0,length);
-        return randomString;
-    }
-
     public enum dataset
     {
         pdd, dbpedia, imdb, synthetic
